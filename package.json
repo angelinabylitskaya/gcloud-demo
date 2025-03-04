@@ -3,18 +3,26 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration local",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "watch": "ng build --watch --configuration local",
+    "test": "ng test",
+    "prepare": "husky"
+  },
+  "engines": {
+    "npm": ">=10.9.0",
+    "node": "22.10.0"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.0",
+    "@angular/cdk": "^18.2.14",
     "@angular/common": "^18.2.0",
     "@angular/compiler": "^18.2.0",
     "@angular/core": "^18.2.0",
+    "@angular/fire": "^18.0.1",
     "@angular/forms": "^18.2.0",
+    "@angular/material": "^18.2.14",
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
@@ -23,16 +31,33 @@
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^18.0.0",
     "@angular-devkit/build-angular": "^18.2.14",
+    "@angular-eslint/eslint-plugin": "^19.2.0",
+    "@angular-eslint/eslint-plugin-template": "^18.4.3",
+    "@angular-eslint/template-parser": "^19.2.0",
     "@angular/cli": "^18.2.14",
     "@angular/compiler-cli": "^18.2.0",
+    "@types/dotenv-webpack": "^7.0.8",
     "@types/jasmine": "~5.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.26.0",
+    "@typescript-eslint/parser": "^8.26.0",
+    "dotenv-webpack": "^8.1.0",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.2",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsdoc": "^50.6.3",
+    "eslint-plugin-prettier": "^5.2.3",
+    "husky": "^9.1.7",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.3",
     "typescript": "~5.5.2"
   }
 }
