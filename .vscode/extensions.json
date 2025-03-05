@@ -1,4 +1,11 @@
 {
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=827846
-  "recommendations": ["angular.ng-template"]
+"recommendations": [
+    "angular.ng-template",
+    "streetsidesoftware.code-spell-checker",
+    "ms-azuretools.vscode-docker",
+    "dbaeumer.vscode-eslint",
+    "jsayol.firebase-explorer",
+    "chflick.firecode"
+]
 }

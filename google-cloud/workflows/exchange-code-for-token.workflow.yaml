@@ -1,0 +1,49 @@
+main:
+  params: [data]
+  steps:
+    - log_code:
+        call: sys.log
+        args:
+            text: ${"auth code=" + json.encode_to_string(data.auth_code)}
+            severity: INFO
+
+    - get_env-Vars:
+        assign:
+          - client_id: ${sys.get_env("CLIENT_ID")}
+          - client_secret: ${sys.get_env("CLIENT_SECRET")}
+          - redirect_url: ${sys.get_env("REDIRECT_URL")}
+
+    - exchange_token:
+        try:
+            call: http.post
+            args:
+                url: "https://oauth2.googleapis.com/token"
+                body:
+                    client_id: ${client_id}
+                    client_secret: ${client_secret}
+                    code: ${data.auth_code}
+                    grant_type: "authorization_code"
+                    redirect_uri: ${redirect_url}
+                headers:
+                    Content-Type: "application/json"
+            result: token_response
+        except:
+          as: error
+          steps:
+            - logError:
+                call: sys.log
+                args:
+                  text: ${"Error during token exchange=" + json.encode_to_string(error.message)}
+                  severity: ERROR
+
+            - returnError:
+                return: ${"OAuth token exchange failed= " + json.encode_to_string(error.message)}
+
+    - log_token:
+        call: sys.log
+        args:
+            text: ${"token=" + json.encode_to_string(token_response.body)}
+            severity: INFO
+
+    - return_response:
+        return: ${token_response.body}
