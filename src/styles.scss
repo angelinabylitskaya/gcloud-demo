@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$violet-palette,
+      tertiary: mat.$azure-palette,
+    ),
+  )
+);
+
+
+:root {
+  --color-primary: #{mat.get-theme-color($theme, primary, 40)};
+  --color-layout: #{mat.get-theme-color($theme, tertiary, 98)};
+
+  //
+  --mdc-filled-button-container-color: #{mat.get-theme-color($theme, primary, 40)};
+  --mdc-filled-button-container-color: #{mat.get-theme-color($theme, primary, 40)};
+
+  // card
+  --mdc-outlined-card-container-color: #fff;
+  --mdc-outlined-card-outline-color: #{mat.get-theme-color($theme, neutral-variant, 90)};
+}
+
+body {
+  background-color: var(--color-layout);
+}

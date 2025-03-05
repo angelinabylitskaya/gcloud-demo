@@ -1,6 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GoogleService } from './core/services';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +8,4 @@ import { GoogleService } from './core/services';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
-  private readonly googleService = inject<GoogleService>(GoogleService);
-
-  ngOnInit() {
-    this.googleService.loginWithGoogle();
-  }
-}
+export class AppComponent {}

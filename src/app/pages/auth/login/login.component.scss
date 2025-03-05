@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.card {
+  width: 100%;
+  max-width: 1200px;
+  max-height: 824px;
+  height: 100%;
+}
+
+.content {
+  height: 100%;
+}
+
+.title {
+  font-size: 40px;
+  color: #fff;
+}
+
+.login {
+  margin: 0;
+}
+
+.subtitle {
+  margin: 4px 0;
+}
+
+.button {
+  margin-top: 20px;
+  min-width: 200px;
+}
+
+.image-bg {
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-primary);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

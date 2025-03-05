@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   BehaviorSubject,
   catchError,
-  filter,
   map,
   Observable,
   of,
@@ -21,7 +20,7 @@ export class GoogleService {
   private readonly http = inject<HttpClient>(HttpClient);
   private readonly router = inject<Router>(Router);
 
-  private readonly token = new BehaviorSubject(
+  private readonly token = new BehaviorSubject<string | null>(
     localStorage.getItem('access_token'),
   );
 
@@ -29,8 +28,17 @@ export class GoogleService {
     return !!this.token.getValue();
   }
 
+  logout(): void {
+    this.token.next(null);
+    localStorage.removeItem('access_token');
+    this.router.navigate(['/login']);
+  }
+
   loginWithGoogle(): void {
-    if (localStorage.getItem('access_token')) return;
+    if (localStorage.getItem('access_token')) {
+      this.navigateHome();
+      return;
+    }
 
     const url = `${environment.gcloud.authUrl}?response_type=code&client_id=${environment.gcloud.clientId}&redirect_uri=${environment.gcloud.redirectUri}&scope=${environment.gcloud.scope}&access_type=offline&prompt=consent`;
     window.location.href = url;
@@ -46,14 +54,12 @@ export class GoogleService {
     return this.http
       .post(
         'https://exchange-code-for-token-257658909770.us-central1.run.app',
-        {
-          auth_code: code,
-        },
+        { auth_code: code },
       )
       .pipe(
         take(1),
         map((response: any) => {
-          console.log(response);
+          this.token.next(response.access_token);
           localStorage.setItem('access_token', response.access_token);
           this.navigateHome();
         }),
@@ -66,8 +72,10 @@ export class GoogleService {
 
   getProfile(): Observable<any> {
     return this.token.asObservable().pipe(
-      filter((token) => !!token),
       switchMap((token) => {
+        if (!token) {
+          throw new Error();
+        }
         const headers = new HttpHeaders().set(
           'Authorization',
           `Bearer ${token}`,
@@ -75,6 +83,9 @@ export class GoogleService {
         return this.http.get('https://www.googleapis.com/oauth2/v1/userinfo', {
           headers,
         });
+      }),
+      catchError(() => {
+        return of(this.logout());
       }),
     );
   }

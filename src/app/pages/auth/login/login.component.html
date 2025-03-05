@@ -1,0 +1,27 @@
+<mat-card appearance="outlined" class="card">
+  <mat-card-content class="content">
+    <mat-grid-list cols="2" rowHeight="100%" class="layout">
+      <mat-grid-tile>
+        <mat-card appearance="outlined" class="image-bg">
+          <mat-card-content>
+            <h1 class="title">Hi!</h1>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <h2 class="login">Login</h2>
+          <p class="subtitle">Welcome to the GCloud Demo!</p>
+          <button
+            mat-flat-button
+            color="primary"
+            class="button"
+            (click)="login()"
+          >
+            Get Started
+          </button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
