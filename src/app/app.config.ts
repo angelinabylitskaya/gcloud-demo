@@ -13,6 +13,7 @@ import {
 } from '@angular/fire/remote-config';
 import { environment } from '../environments/environment';
 import { provideHttpClient } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,5 +26,6 @@ export const appConfig: ApplicationConfig = {
     provideFunctions(() => getFunctions()),
     provideStorage(() => getStorage()),
     provideRemoteConfig(() => getRemoteConfig()),
+    provideAnimations(),
   ],
 };

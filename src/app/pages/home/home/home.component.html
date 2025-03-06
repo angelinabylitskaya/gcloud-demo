@@ -1,5 +1,36 @@
-<p>home works!</p>
+<mat-drawer-container class="container">
+  <mat-drawer mode="side" opened class="drawer">
+    <div class="drawer-content">
+      <div>
+        <mat-list role="list">
+          <!-- <mat-list-item role="listitem">Item 1</mat-list-item>
+          <mat-list-item role="listitem">Item 2</mat-list-item>
+          <mat-list-item role="listitem">Item 3</mat-list-item> -->
+        </mat-list>
+      </div>
 
-<pre>{{ userData | async | json }}</pre>
+      @if (userData$ | async; as user) {
+        <mat-card class="user-card">
+          <mat-card-content class="user-card-content">
+            <img [src]="user.picture" [alt]="user.name" class="user-pic" />
+            <div>
+              <p class="user-name">{{ user.name }}</p>
+              <p class="user-email">{{ user.email }}</p>
+            </div>
 
-<button mat-flat-button color="primary" (click)="logout()">Logout</button>
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="menu">
+              <mat-icon class="icon">more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="logout()">
+                <span>Logout</span>
+              </button>
+            </mat-menu>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content></mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,66 @@
+.container {
+  height: 100vh;
+}
+
+.drawer {
+  background: #fff;
+  padding: 16px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+}
+
+.user-card {
+  background-color: var(--color-primary);
+  border: none;
+  position: relative;
+
+  &-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+}
+
+.user-pic {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.user-name,
+.user-email {
+  color: #fff;
+  margin: 0;
+}
+
+.user-name {
+  font-size: 14px;
+}
+
+.user-email {
+  font-size: 12px;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.icon {
+  font-size: 16px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

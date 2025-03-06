@@ -13,7 +13,7 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['projects/**/*', '**/node_modules/', '**/dist/', '**/build/'],
+    ignores: ['projects/**/*', '**/node_modules/', '**/dist/', '**/build/', 'src/index.html'],
   },
   ...compat.extends('plugin:prettier/recommended'),
   ...compat
