@@ -1,0 +1,25 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '${ARTIFACTS_REGISTRY_REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACTS_REGISTRY_REPO_NAME}/webapp-image:${SHORT_SHA}', '.'] # SHORT_SHA is generated automatically. Change to a custom variable to provide custom version
+
+  # Push the Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${ARTIFACTS_REGISTRY_REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACTS_REGISTRY_REPO_NAME}/webapp-image:${SHORT_SHA}']
+
+  # Deploy to Compute Engine
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'compute'
+      - 'instances'
+      - 'create-with-container' # both creates and updates VM
+      - '${VM_INSTANCE_NAME}'
+      - '--container-image'
+      - '${ARTIFACTS_REGISTRY_REGION}-docker.pkg.dev/gcloud-demo-452713/${ARTIFACTS_REGISTRY_REPO_NAME}/webapp-image:${SHORT_SHA}'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=${VM_INSTANCE_ZONE}'
+      - 'CLOUDSDK_COMPUTE_REGION=${VM_INSTANCE_REGION}'
+
+images:
+  - '${ARTIFACTS_REGISTRY_REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACTS_REGISTRY_REPO_NAME}/webapp-image:${SHORT_SHA}'

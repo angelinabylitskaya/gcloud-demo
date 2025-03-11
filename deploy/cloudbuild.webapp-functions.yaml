@@ -1,0 +1,15 @@
+steps:
+  # Build the function and deploy to Cloud Run functions
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - my-cloud-run-function # Replace with your function name
+      - --gen2 #Important to deploy to Cloud Run functions.
+      - --region=us-central1 # Replace with your desired region
+      - --runtime=nodejs20 # Replace with your desired runtime
+      - --source=. # Function source code in current directory
+      - --trigger-http # Or another trigger type (e.g., --trigger-topic my-topic)
+      - --allow-unauthenticated # Or configure proper IAM
+    timeout: 7200s # 2 hours
