@@ -13,6 +13,7 @@ Configure Google CLoud Build for CI/CD
   - [CD on Cloud Run Functions](#cd-on-cloud-run-functions)
   - [CI](#ci)
 - [4. Create Artifacts Registry Repository](#4-create-artifacts-registry-repository)
+- [5. Troubleshooting](#5-troubleshooting)
 
 
 ## 1. Create Service account
@@ -74,3 +75,7 @@ Required to store Docker images
 Navigate to [Artifacts Registry Repositories](https://console.cloud.google.com/artifacts)
 
 Create repository
+
+## 5. Troubleshooting
+
+![alt text](assets/ci-error.png)
